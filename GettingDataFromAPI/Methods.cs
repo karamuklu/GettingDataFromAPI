@@ -17,8 +17,8 @@ namespace GettingDataFromAPI
 			HttpClient client = new HttpClient();
 			var result = client.GetAsync(builder.Uri).Result;
 			StreamReader sr = new StreamReader(result.Content.ReadAsStreamAsync().Result);
-			var cevap = sr.ReadToEnd().Normalize().ToString();
-			GettingToken accessTokenModel = JsonConvert.DeserializeObject<GettingToken>(cevap);
+			var answer = sr.ReadToEnd().Normalize().ToString();
+			GettingToken accessTokenModel = JsonConvert.DeserializeObject<GettingToken>(answer);
 			var token = accessTokenModel.data.FirstOrDefault().token;
 			return token;
 		}
@@ -35,8 +35,8 @@ namespace GettingDataFromAPI
 			HttpContent content = new FormUrlEncodedContent(pairs);
 			HttpResponseMessage response = client.PostAsync(serviceUrl, content).Result;
 			StreamReader sr = new StreamReader(response.Content.ReadAsStreamAsync().Result);
-			var cevap = sr.ReadToEnd().Normalize().ToString();
-			var accessTokenModel = JsonConvert.DeserializeObject<GettingCategory>(cevap);
+			var answer = sr.ReadToEnd().Normalize().ToString();
+			var accessTokenModel = JsonConvert.DeserializeObject<GettingCategory>(answer);
 			list.AddRange(accessTokenModel.data);
 			return list;
 		}
